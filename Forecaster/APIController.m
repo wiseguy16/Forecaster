@@ -25,13 +25,14 @@
                                       {
                                           if (error)
                                           {
-                                              NSLog(@"Could not communicate to iTunes: %@", [error localizedDescription]);
+                                              NSLog(@"Could not communicate to Google: %@", [error localizedDescription]);
                                           }
                                           else
                                           {
                                               NSError *parseError = nil;
                                               NSDictionary *googleResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
                                               [self.delegate didReceiveAPIResults:googleResponse];
+                                              NSLog(@"%@", googleResponse);
                                           }
                                           
                                       }];

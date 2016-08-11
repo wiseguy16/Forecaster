@@ -16,13 +16,37 @@
     if (cityDict)
     {
         aCity = [[City alloc] init];
-        aCity.name = cityDict[@"name"];
+        
+        NSArray *resultsArray = cityDict[@"results"];
+        NSDictionary *resultsDict = resultsArray[0];
+        NSString *fullAddress = resultsDict[@"formatted_address"];
+        
+        NSString *list = fullAddress;
+        NSArray *listItems = [list componentsSeparatedByString:@", "];
+        
+        aCity.name = listItems[0];
+        NSString *newList = listItems[1];
+        NSArray *newListItems = [newList componentsSeparatedByString:@" "];
+        aCity.stateShortName = newListItems[0];
+        
+        NSDictionary *geometryDict = resultsDict[@"geometry"];
+        NSDictionary *locationDict = geometryDict[@"location"];
+        aCity.cityLatString = locationDict[@"lat"];
+        aCity.cityLongString = locationDict[@"lng"];
+        aCity.cityLatDouble = locationDict[@"lat"];
+        aCity.cityLongDouble = locationDict[@"lng"];
+        
+        
+        
+       // aCity.name = cityDict[@"name"];
+        
+        /*
         aCity.cityLatString = cityDict[@"login"];
         aCity.cityLongString = cityDict[@"location"];
         aCity.stateShortName = cityDict[@"avatar_url"];
         aCity.cityLatDouble = cityDict[@"public_repos"];
         aCity.cityLongDouble = cityDict[@"public_repos"];
-
+         */
     }
     
     return aCity;

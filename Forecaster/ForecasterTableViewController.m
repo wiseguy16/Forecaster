@@ -10,6 +10,7 @@
 #import "APIController.h"
 #import "SelectCityViewController.h"
 #import "City.h"
+#import "CityTableViewCell.h"
 
 @interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate>
 
@@ -22,6 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Forecaster";
+    
+    self.cities = [[NSMutableArray alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -45,14 +49,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.cities.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CityTableViewCell" forIndexPath:indexPath];
+    CityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CityTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    City *aCity = self.cities[indexPath.row];
+    
+   // cell.temperatureLabel.text = aCity.temperature;
+    cell.cityNameLabel.text = aCity.name;
+   // cell.currentConditionsLabel.text = aCity.currentConditions;
+    cell.currentConditionsLabel.text = aCity.stateShortName;
+    
+    
+    
     
     return cell;
 }
@@ -108,8 +121,21 @@
     APIController *apiController = [[APIController alloc] init];
     apiController.delegate = self;
     [apiController searchGoogleFor:zipcodeToLookUp];
+    NSLog(@"%@ 2nd time", zipcodeToLookUp);
     [self.tableView reloadData];
     
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SelectCitySegue"])
+    {
+        SelectCityViewController *setZipcodeVC = [segue destinationViewController];
+        setZipcodeVC.delegate = self;
+    }
 }
 
 

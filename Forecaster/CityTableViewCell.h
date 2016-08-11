@@ -10,4 +10,9 @@
 
 @interface CityTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentConditionsLabel;
+
+
 @end
