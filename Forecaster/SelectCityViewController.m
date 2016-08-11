@@ -10,11 +10,15 @@
 
 @interface SelectCityViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *zipcodeTextField;
+
+
 @end
 
 @implementation SelectCityViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -23,6 +27,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)findACityTapped:(UIButton *)sender
+{
+    [self.delegate searchWasTyped:self.zipcodeTextField.text];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (IBAction)useCurrentLocationTapped:(UIButton *)sender
+{
+    // USE MKAnnotatePoint to get gps coordinates
+    
+    
+}
+
 
 /*
 #pragma mark - Navigation

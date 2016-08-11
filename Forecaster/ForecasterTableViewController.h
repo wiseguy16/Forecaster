@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+@protocol SearchTextFieldDelegate
+
+-(void)searchWasTyped:(NSString *)zipcodeToLookUp;
+
+@end
+
+
+@protocol APIControllerProtocol
+
+-(void)didReceiveAPIResults:(NSDictionary *)googleResponse;
+
+@end
+
 @interface ForecasterTableViewController : UITableViewController
 
 @end

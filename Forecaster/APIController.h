@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ForecasterTableViewController.h"
 
 @interface APIController : NSObject
+
+@property (strong, nonatomic) id<APIControllerProtocol> delegate;
+
+-(void)searchGoogleFor:(NSString *)searchTerm;
 
 @end

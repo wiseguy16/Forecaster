@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ForecasterTableViewController.h"
 
 @interface SelectCityViewController : UIViewController
+
+@property (nonatomic) id<SearchTextFieldDelegate> delegate;
 
 @end

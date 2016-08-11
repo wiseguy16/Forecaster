@@ -14,7 +14,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="EGd-4h-o6Z" customClass="CityTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityTableViewCell" rowHeight="51" id="EGd-4h-o6Z" customClass="CityTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="600" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EGd-4h-o6Z" id="kWI-B8-lXo">
@@ -51,8 +51,43 @@
                     <view key="view" contentMode="scaleToFill" id="bW2-4m-vDI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWz-HR-p9p">
+                                <rect key="frame" x="264" y="130" width="73" height="30"/>
+                                <state key="normal" title="Find a City"/>
+                                <connections>
+                                    <action selector="findACityTapped:" destination="t3w-js-5QP" eventType="touchUpInside" id="Cw9-E7-cpB"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type in a zipcode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Du8-fV-Zsr">
+                                <rect key="frame" x="233" y="60" width="134" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="t3w-js-5QP" id="FNu-HY-TzB"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQw-yo-kUN">
+                                <rect key="frame" x="218" y="200" width="164" height="30"/>
+                                <state key="normal" title="Use my current location"/>
+                                <connections>
+                                    <action selector="useCurrentLocationTapped:" destination="t3w-js-5QP" eventType="touchUpInside" id="QuO-Nw-Ohh"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iWz-HR-p9p" firstAttribute="top" secondItem="Du8-fV-Zsr" secondAttribute="bottom" constant="40" id="60u-fR-VOl"/>
+                            <constraint firstItem="DQw-yo-kUN" firstAttribute="centerX" secondItem="bW2-4m-vDI" secondAttribute="centerX" id="ZrN-TP-AUz"/>
+                            <constraint firstItem="DQw-yo-kUN" firstAttribute="top" secondItem="iWz-HR-p9p" secondAttribute="bottom" constant="40" id="bKe-9N-Vwo"/>
+                            <constraint firstItem="iWz-HR-p9p" firstAttribute="centerX" secondItem="bW2-4m-vDI" secondAttribute="centerX" id="uBk-C1-lbW"/>
+                            <constraint firstItem="Du8-fV-Zsr" firstAttribute="centerX" secondItem="bW2-4m-vDI" secondAttribute="centerX" id="w1F-Ai-VaC"/>
+                            <constraint firstItem="Du8-fV-Zsr" firstAttribute="top" secondItem="y17-lg-hPV" secondAttribute="bottom" constant="40" id="xSy-sN-tPo"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="zipcodeTextField" destination="Du8-fV-Zsr" id="ajU-fZ-rC1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dDI-Ro-WYP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

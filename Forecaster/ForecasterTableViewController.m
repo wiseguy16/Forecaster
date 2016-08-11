@@ -7,14 +7,20 @@
 //
 
 #import "ForecasterTableViewController.h"
+#import "APIController.h"
+#import "SelectCityViewController.h"
+#import "City.h"
 
-@interface ForecasterTableViewController ()
+@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate>
+
+@property(strong, nonatomic) NSMutableArray *cities;
 
 @end
 
 @implementation ForecasterTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -24,32 +30,32 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CityTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -94,5 +100,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Date Set delegate
+
+-(void)searchWasTyped:(NSString *)zipcodeToLookUp
+{
+    APIController *apiController = [[APIController alloc] init];
+    apiController.delegate = self;
+    [apiController searchGoogleFor:zipcodeToLookUp];
+    [self.tableView reloadData];
+    
+}
+
+
+
+-(void)didReceiveAPIResults:(NSDictionary *)googleResponse
+{
+    City *aCity = [City cityWithDictionary:googleResponse];
+    [self.cities addObject:aCity];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+    
+}
+
+
+
 
 @end
