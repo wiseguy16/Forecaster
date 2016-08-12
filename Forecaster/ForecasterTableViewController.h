@@ -20,9 +20,11 @@
 @protocol APIControllerProtocol
 
 -(void)didReceiveAPIResults:(NSDictionary *)googleResponse;
+-(void)didReceiveAPIResults2:(NSDictionary *)darkSkyResponse;
 
 @end
 
 @interface ForecasterTableViewController : UITableViewController
+
 
 @end

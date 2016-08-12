@@ -65,7 +65,7 @@
                                           {
                                               NSError *parseError = nil;
                                               NSDictionary *darkSkyResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-                                              [self.delegate didReceiveAPIResults:darkSkyResponse];
+                                              [self.delegate didReceiveAPIResults2:darkSkyResponse];
                                               NSLog(@"%@", darkSkyResponse);
                                           }
                                           

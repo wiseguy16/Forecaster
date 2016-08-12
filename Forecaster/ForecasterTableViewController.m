@@ -11,10 +11,12 @@
 #import "SelectCityViewController.h"
 #import "City.h"
 #import "CityTableViewCell.h"
+#import "Weather.h"
 
 @interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate>
 
 @property(strong, nonatomic) NSMutableArray *cities;
+@property(strong, nonatomic) NSMutableArray *weathers;
 
 @end
 
@@ -26,6 +28,7 @@
     self.title = @"Forecaster";
     
     self.cities = [[NSMutableArray alloc] init];
+    self.weathers = [[NSMutableArray alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -58,19 +61,21 @@
     
     // Configure the cell...
     City *aCity = self.cities[indexPath.row];
+    Weather *aWeather = self.weathers[indexPath.row];
     
-    NSString *lat = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
-    NSString *ltg = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
-    
-    APIController *apiController = [[APIController alloc] init];
-    apiController.delegate = self;
-    [apiController searchDarkSkyForLat:lat andLong:ltg];
+//    NSString *lat = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
+//    NSString *ltg = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
+//    
+//    APIController *apiController = [[APIController alloc] init];
+//    apiController.delegate = self;
+//    [apiController searchDarkSkyForLat:lat andLong:ltg];
    // NSLog(@"%@ 2nd time", zipcodeToLookUp);
     
    // cell.temperatureLabel.text = aCity.temperature;
     cell.cityNameLabel.text = aCity.name;
    // cell.currentConditionsLabel.text = aCity.currentConditions;
-    cell.currentConditionsLabel.text = aCity.stateShortName;
+    cell.currentConditionsLabel.text = aWeather.summary;
+    cell.temperatureLabel.text = [NSString stringWithFormat:@"%d°F",[aWeather.temperature intValue]];
     
     NSLog(@"name is %@", aCity.name);
     NSLog(@"State is %@", aCity.stateShortName);
@@ -163,10 +168,33 @@
     City *aCity = [City cityWithDictionary:googleResponse];
     [self.cities addObject:aCity];
     dispatch_async(dispatch_get_main_queue(), ^{
+       // [self.tableView reloadData];
+    });
+    
+    if (aCity)
+    {
+        NSString *lat = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
+        NSString *ltg = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
+        
+        APIController *apiController = [[APIController alloc] init];
+        apiController.delegate = self;
+        [apiController searchDarkSkyForLat:lat andLong:ltg];
+    }
+    
+   // [self.tableView reloadData];
+    
+}
+
+-(void)didReceiveAPIResults2:(NSDictionary *)darkSkyResponse
+{
+    Weather *aWeather = [Weather weatherWithDictionary:darkSkyResponse];
+    [self.weathers addObject:aWeather];
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
     
 }
+
 
 
 
