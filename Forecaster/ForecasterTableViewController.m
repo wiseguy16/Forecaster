@@ -59,6 +59,14 @@
     // Configure the cell...
     City *aCity = self.cities[indexPath.row];
     
+    NSString *lat = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
+    NSString *ltg = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
+    
+    APIController *apiController = [[APIController alloc] init];
+    apiController.delegate = self;
+    [apiController searchDarkSkyForLat:lat andLong:ltg];
+   // NSLog(@"%@ 2nd time", zipcodeToLookUp);
+    
    // cell.temperatureLabel.text = aCity.temperature;
     cell.cityNameLabel.text = aCity.name;
    // cell.currentConditionsLabel.text = aCity.currentConditions;
