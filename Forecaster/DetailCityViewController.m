@@ -56,20 +56,23 @@
         self.title = [NSString stringWithFormat: @"%@", self.detailCity.name];
         
         self.temperatureLabel.text = [NSString stringWithFormat:@"%d°F", [self.detailWeather.temperature intValue]];
+        self.conditionsImageView.image = [UIImage imageNamed:self.detailWeather.icon];
+        self.conditionsLabel.text = self.detailWeather.summary;
+        self.humidityLabel.text = [NSString stringWithFormat:@"%g",([self.detailWeather.humidity doubleValue]*100)];
+        self.rainLabel.text = [NSString stringWithFormat:@"%g",([self.detailWeather.precipProbability doubleValue]*100)];
+        self.feelsLikeLabel.text = [NSString stringWithFormat:@"Feels Like: %d°F", [self.detailWeather.apparentTemperature intValue]];
+        self.windLabel.text = [NSString stringWithFormat:@"%dMPH", [self.detailWeather.windSpeed intValue]];
+
+        
         // [NSString stringWithFormat:@"%d°F",[aWeather.temperature intValue]];
-//        
-//        self.heroNameLabel.text = self.hero.name;
-//        self.heroHomeWorldLabel.text = [NSString stringWithFormat: @"Appears in %@ comics!", self.hero.appearances];
-//        self.heroPowersLabel.text = self.hero.theDescription;
 //        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:self.hero.imageName]];
-//        
 //        self.heroImageView.image = [UIImage imageWithData: imageData]; // This should probably be done async????
 //        
     }
 }
 
 
-
+// cell.cardImageView.image = [UIImage imageNamed:self.allCards[characterName]];
 
 /*
 #pragma mark - Navigation
