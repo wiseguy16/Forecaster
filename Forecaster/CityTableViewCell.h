@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentConditionsLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *latTempLabel;
+@property (weak, nonatomic) IBOutlet UILabel *longTempLabel;
 
 @end

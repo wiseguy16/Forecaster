@@ -40,6 +40,36 @@
     [dataTask resume];
 }
 
+-(void)searchDarkSkyFor:(NSString *)searchTerm
+{
+    
+    NSString *darkSkySearchTerm = [searchTerm stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSString *escapedSearchTerm = [darkSkySearchTerm stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
+    
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.forecast.io/forecast/435e383f722feaadf30ab2b1aef09c5d/LATITUDE,LONGITUDE", escapedSearchTerm]];
+    
+    NSURLSession *session =[NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                      {
+                                          if (error)
+                                          {
+                                              NSLog(@"Could not communicate to Google: %@", [error localizedDescription]);
+                                          }
+                                          else
+                                          {
+                                              NSError *parseError = nil;
+                                              NSDictionary *darkSkyResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+                                              [self.delegate didReceiveAPIResults:darkSkyResponse];
+                                              NSLog(@"%@", darkSkyResponse);
+                                          }
+                                          
+                                      }];
+    
+    [dataTask resume];
+}
+
+
 
 
 @end

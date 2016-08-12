@@ -28,31 +28,55 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80°F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szf-Hw-iaW">
-                                            <rect key="frame" x="482" y="27" width="57" height="32"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mostly Cloudy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aL-ET-yg7">
                                             <rect key="frame" x="28" y="52" width="108" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80°F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szf-Hw-iaW">
+                                            <rect key="frame" x="482" y="27" width="57" height="32"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBj-Bt-oFL">
+                                            <rect key="frame" x="112" y="20" width="50" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELs-Ne-vtV">
+                                            <rect key="frame" x="170" y="20" width="61" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="EBj-Bt-oFL" firstAttribute="leading" secondItem="vUC-3p-CPp" secondAttribute="trailing" constant="12" id="5bv-o7-aqW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="szf-Hw-iaW" secondAttribute="trailing" constant="20" id="6Bq-f5-fS2"/>
+                                        <constraint firstItem="EBj-Bt-oFL" firstAttribute="centerY" secondItem="vUC-3p-CPp" secondAttribute="centerY" id="7di-gQ-Gpf"/>
                                         <constraint firstItem="vUC-3p-CPp" firstAttribute="leading" secondItem="kWI-B8-lXo" secondAttribute="leadingMargin" constant="20" id="9ml-jO-mN4"/>
                                         <constraint firstItem="szf-Hw-iaW" firstAttribute="centerY" secondItem="kWI-B8-lXo" secondAttribute="centerY" id="Fmt-Y9-wIC"/>
+                                        <constraint firstItem="EBj-Bt-oFL" firstAttribute="centerY" secondItem="kWI-B8-lXo" secondAttribute="centerY" id="Gw8-No-fvh"/>
                                         <constraint firstItem="9aL-ET-yg7" firstAttribute="leading" secondItem="kWI-B8-lXo" secondAttribute="leadingMargin" constant="20" id="HUI-1L-2Hf"/>
+                                        <constraint firstItem="ELs-Ne-vtV" firstAttribute="centerY" secondItem="EBj-Bt-oFL" secondAttribute="centerY" id="jlF-zH-NK6"/>
                                         <constraint firstItem="vUC-3p-CPp" firstAttribute="top" secondItem="kWI-B8-lXo" secondAttribute="topMargin" constant="8" id="kB6-YU-7hF"/>
                                         <constraint firstItem="9aL-ET-yg7" firstAttribute="top" secondItem="vUC-3p-CPp" secondAttribute="bottom" constant="12" id="mJF-DA-POb"/>
+                                        <constraint firstItem="ELs-Ne-vtV" firstAttribute="leading" secondItem="EBj-Bt-oFL" secondAttribute="trailing" constant="8" id="rFd-O2-dF0"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Gw8-No-fvh"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cityNameLabel" destination="vUC-3p-CPp" id="aUh-gE-Nni"/>
                                     <outlet property="currentConditionsLabel" destination="9aL-ET-yg7" id="9Om-jq-T2P"/>
+                                    <outlet property="latTempLabel" destination="EBj-Bt-oFL" id="KKg-pA-VwF"/>
+                                    <outlet property="longTempLabel" destination="ELs-Ne-vtV" id="vg7-pd-mZs"/>
                                     <outlet property="temperatureLabel" destination="szf-Hw-iaW" id="wrJ-18-m7l"/>
                                 </connections>
                             </tableViewCell>
@@ -87,8 +111,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWz-HR-p9p">
-                                <rect key="frame" x="264" y="130" width="73" height="30"/>
-                                <state key="normal" title="Find a City"/>
+                                <rect key="frame" x="226" y="130" width="148" height="30"/>
+                                <state key="normal" title="Get city from zipcode"/>
                                 <connections>
                                     <action selector="findACityTapped:" destination="t3w-js-5QP" eventType="touchUpInside" id="Cw9-E7-cpB"/>
                                 </connections>

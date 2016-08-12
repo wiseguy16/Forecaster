@@ -64,6 +64,16 @@
    // cell.currentConditionsLabel.text = aCity.currentConditions;
     cell.currentConditionsLabel.text = aCity.stateShortName;
     
+    NSLog(@"name is %@", aCity.name);
+    NSLog(@"State is %@", aCity.stateShortName);
+    NSLog(@"Lat is is %@", aCity.cityLatDouble);
+ //   NSLog(@"Long is %@", aCity.name);
+   // NSLog(@"Something is %@", aCity.name);
+    
+    
+    cell.latTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
+    cell.longTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
+    
     
     
     
