@@ -12,6 +12,7 @@
 #import "City.h"
 #import "CityTableViewCell.h"
 #import "Weather.h"
+#import "DetailCityViewController.h"
 
 @interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate>
 
@@ -159,7 +160,32 @@
         SelectCityViewController *setZipcodeVC = [segue destinationViewController];
         setZipcodeVC.delegate = self;
     }
+    
+    if ([segue.identifier isEqualToString:@"DetailCitySegue"])
+    {
+        DetailCityViewController *setDetailVC = [segue destinationViewController];
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        setDetailVC.detailCity = self.cities[indexPath.row];
+        setDetailVC.detailWeather = self.weathers[indexPath.row];
+        
+        //City *selectedCity = [self.cities objectAtIndex:indexPath.row];
+
+       // setDetailVC.detailCity = City *aCity = self.cities[indexPath.row];//[self.cities objectAtIndex: indexPath.row]; //[getArray objectAtIndex:indexPath.row];
+       // setDetailVC.delegate = self;
+    }
+
+    
 }
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.identifier isEqualToString:@"DetailCitySegue"])
+//    {
+//        SelectCityViewController *setZipcodeVC = [segue destinationViewController];
+//        setZipcodeVC.delegate = self;
+//    }
+//}
+
 
 
 
