@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+//#define kNameKey @"kCitiesKey";
 
 @protocol SearchTextFieldDelegate
 
@@ -26,5 +26,6 @@
 
 @interface ForecasterTableViewController : UITableViewController
 
+- (void)saveCityData;
 
 @end

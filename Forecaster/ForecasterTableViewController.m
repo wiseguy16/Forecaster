@@ -14,10 +14,12 @@
 #import "Weather.h"
 #import "DetailCityViewController.h"
 
-@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate>
+@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate, NSCoding>
 
 @property(strong, nonatomic) NSMutableArray *cities;
 @property(strong, nonatomic) NSMutableArray *weathers;
+@property(strong, nonatomic) NSMutableDictionary *userStuff;
+//#define kCitiesKey @"kCitiesKey";
 
 @end
 
@@ -30,6 +32,8 @@
     
     self.cities = [[NSMutableArray alloc] init];
     self.weathers = [[NSMutableArray alloc] init];
+    
+    [self loadCityData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -220,6 +224,28 @@
     });
     
 }
+//#define kNameKey @"kCitiesKey";
+//#define kCitiesKey @"kCitiesKey";
+
+- (void)loadCityData
+{
+    NSData *cityData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCitiesKey"];
+    if (cityData)
+    {
+        self.cities = [NSKeyedUnarchiver unarchiveObjectWithData:cityData];
+    }
+    else
+    {
+        self.cities = [[NSMutableArray alloc] init];
+    }
+}
+
+- (void)saveCityData
+{
+    NSData *cityData = [NSKeyedArchiver archivedDataWithRootObject:self.cities];
+    [[NSUserDefaults standardUserDefaults] setObject:cityData forKey:@"kCitiesKey"];
+}
+
 
 
 
