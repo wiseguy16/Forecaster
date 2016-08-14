@@ -64,11 +64,6 @@
         self.feelsLikeLabel.text = [NSString stringWithFormat:@"Feels Like: %d°F", [self.detailWeather.apparentTemperature intValue]];
         self.windLabel.text = [NSString stringWithFormat:@"%dMPH", [self.detailWeather.windSpeed intValue]];
 
-        
-        // [NSString stringWithFormat:@"%d°F",[aWeather.temperature intValue]];
-//        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:self.hero.imageName]];
-//        self.heroImageView.image = [UIImage imageWithData: imageData]; // This should probably be done async????
-//
         [self configureLocationManager];
     }
 }
@@ -80,40 +75,14 @@
     CLLocationDegrees cityPickedLat = [self.detailCity.cityLatDouble doubleValue];
     CLLocationDegrees cityPickedLtg = [self.detailCity.cityLongDouble doubleValue];
     CLLocationCoordinate2D cityPicked = CLLocationCoordinate2DMake(cityPickedLat, cityPickedLtg);
-    //CLLocationCoordinate2D tiySample = CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude)
     // 0 lat is equator north is pos, south is neg
     // 0 long greeninch england west is neg, east is pos of England
     MKPointAnnotation *cityPickedAnnotation = [[MKPointAnnotation alloc] init];
     cityPickedAnnotation.coordinate = cityPicked;
     cityPickedAnnotation.title = self.detailCity.name;
-   // cityPickedAnnotation.subtitle = @"Tampa";
     [self.annotations addObject:cityPickedAnnotation];
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(cityPicked, 100000, 100000);
     [self.cityMapView setRegion:viewRegion animated:YES];
-    
-/*
-    // LAKELAND
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:@"Lakeland, FL" completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (!error)
-        {
-            MKPlacemark *placemark = placemarks[0];
-            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-            annotation.coordinate = placemark.location.coordinate; // Using this later as a center point
-            annotation.title = @"Lakeland, FL";
-            [self.cityMapView addAnnotation:annotation]; // runs in background with network call
-            
-            MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 5000, 5000);
-            [self.cityMapView setRegion:viewRegion animated:YES];
-            
-        }
-    }];
-
-*/
-    
-    // ORLANDO configured in bottom method
-    
-    
     
     
     [self.cityMapView addAnnotations:self.annotations];
@@ -180,24 +149,10 @@
     [self enableLocationManager:NO];
 //    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
 //    annotation.coordinate = location.coordinate;
-//    annotation.title = @"The Iron Yard";
 //    [self.annotations addObject:annotation];
     [self configureAnnotations];
 }
 
 
-
-
-// cell.cardImageView.image = [UIImage imageNamed:self.allCards[characterName]];
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

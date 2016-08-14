@@ -67,55 +67,17 @@
     City *aCity = self.cities[indexPath.row];
     Weather *aWeather = self.weathers[indexPath.row];
     
-//    NSString *lat = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
-//    NSString *ltg = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
-//    
-//    APIController *apiController = [[APIController alloc] init];
-//    apiController.delegate = self;
-//    [apiController searchDarkSkyForLat:lat andLong:ltg];
-   // NSLog(@"%@ 2nd time", zipcodeToLookUp);
-    
-   // cell.temperatureLabel.text = aCity.temperature;
     cell.cityNameLabel.text = aCity.name;
-   // cell.currentConditionsLabel.text = aCity.currentConditions;
     cell.currentConditionsLabel.text = aWeather.summary;
     cell.temperatureLabel.text = [NSString stringWithFormat:@"%d°F",[aWeather.temperature intValue]];
     
     NSLog(@"name is %@", aCity.name);
     NSLog(@"State is %@", aCity.stateShortName);
     NSLog(@"Lat is is %@", aCity.cityLatDouble);
- //   NSLog(@"Long is %@", aCity.name);
-   // NSLog(@"Something is %@", aCity.name);
-    
-    
-//    cell.latTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
-//    cell.longTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
-    
-    
-    
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
 
 #pragma mark - Zipcode Set delegate
@@ -155,18 +117,7 @@
            {
              NSLog(@"%@ line 152ish", setZipcodeVC.gpsCity.cityLatDouble);
             }
-//      //  NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-//        setZipcodeVC.gpsCity = sender;
-//        if (sender)
-//        {
-//        //setZipcodeVC.gpsWeather = self.weathers[indexPath.row];
-//        NSString *lat = [NSString stringWithFormat:@"%@", setZipcodeVC.gpsCity.cityLatDouble];
-//        NSString *ltg = [NSString stringWithFormat:@"%@", setZipcodeVC.gpsCity.cityLongDouble];
-//        
-//        APIController *apiController = [[APIController alloc] init];
-//        apiController.delegate = self;
-//        [apiController searchDarkSkyForLat:lat andLong:ltg];
-//        }
+
     }
     
     if ([segue.identifier isEqualToString:@"DetailCitySegue"])
@@ -233,7 +184,6 @@
 
 - (void)saveCityData
 {
-  //  NSLog(self.cities[0]);
     NSData *cityData = [NSKeyedArchiver archivedDataWithRootObject:self.cities];
     [[NSUserDefaults standardUserDefaults] setObject:cityData forKey:@"kCitiesKey"];
 }

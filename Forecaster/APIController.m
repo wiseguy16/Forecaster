@@ -40,17 +40,10 @@
     [dataTask resume];
 }
 
-//01  - (int)addX:(int)x toY:(int)y {
-//    02      int sum = x + y;
-//    03      return sum;
-//    04  }
 
 -(void)searchDarkSkyForLat:(NSString *)latitude andLong:(NSString *)longitude
 {
-    
-//    NSString *darkSkySearchTerm = [searchTerm stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-//    NSString *escapedSearchTerm = [darkSkySearchTerm stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
-    
+   
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.forecast.io/forecast/435e383f722feaadf30ab2b1aef09c5d/%@,%@", latitude, longitude]];
     
@@ -79,5 +72,3 @@
 
 @end
 
-
-//  https://maps.googleapis.com/maps/api/geocode/json?address=santa+cruz&components=postal_code:32810&sensor=false

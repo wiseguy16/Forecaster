@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
 @property (weak, nonatomic) IBOutlet UILabel *feelsLikeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *windLabel;
-//@property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 
 @property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 

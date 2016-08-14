@@ -34,20 +34,3 @@
 
 @end
 
-
-
-
-
-
-
-
-/*
- @property (nonatomic) NSString *summary;
- @property (nonatomic) NSString *temperature;
- @property (nonatomic) NSString *humidity;
- @property (nonatomic) NSString *windSpeed;
- @property (nonatomic) NSString *icon;
- @property (nonatomic) NSString *precipProbability;
- @property (nonatomic) NSString *apparentTemperature;
- 
- */

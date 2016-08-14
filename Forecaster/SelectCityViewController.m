@@ -20,6 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // ******* STUFF FOR BUTTONS *********************
     self.pickACityButton.layer.borderWidth = 1.0f;
     self.useGPSButton.layer.borderWidth = 1.0f;
     
@@ -32,7 +34,8 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -48,6 +51,7 @@
 
 - (IBAction)DismissXTapped:(UIButton *)sender
 {
+    // ********* A WAY TO BACK OUT ***********************
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -62,54 +66,11 @@
         _gpsCity = newCity;
         _gpsWeather = newWeather;
         
-        // Update the view.
-       // [self configureView];
     }
 }
 
 //-(void)configureAnnotations
 //{
-//  /*
-//    // City Picked!!
-//    CLLocationDegrees cityPickedLat = [self.detailCity.cityLatDouble doubleValue];
-//    CLLocationDegrees cityPickedLtg = [self.detailCity.cityLongDouble doubleValue];
-//    CLLocationCoordinate2D cityPicked = CLLocationCoordinate2DMake(cityPickedLat, cityPickedLtg);
-//    //CLLocationCoordinate2D tiySample = CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude)
-//    // 0 lat is equator north is pos, south is neg
-//    // 0 long greeninch england west is neg, east is pos of England
-//    MKPointAnnotation *cityPickedAnnotation = [[MKPointAnnotation alloc] init];
-//    cityPickedAnnotation.coordinate = cityPicked;
-//    cityPickedAnnotation.title = self.detailCity.name;
-//    // cityPickedAnnotation.subtitle = @"Tampa";
-//    [self.annotations addObject:cityPickedAnnotation];
-//    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(cityPicked, 100000, 100000);
-//    [self.cityMapView setRegion:viewRegion animated:YES];
-// */
-//    /*
-//     // LAKELAND
-//     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-//     [geocoder geocodeAddressString:@"Lakeland, FL" completionHandler:^(NSArray *placemarks, NSError *error) {
-//     if (!error)
-//     {
-//     MKPlacemark *placemark = placemarks[0];
-//     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-//     annotation.coordinate = placemark.location.coordinate; // Using this later as a center point
-//     annotation.title = @"Lakeland, FL";
-//     [self.cityMapView addAnnotation:annotation]; // runs in background with network call
-//     
-//     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 5000, 5000);
-//     [self.cityMapView setRegion:viewRegion animated:YES];
-//     
-//     }
-//     }];
-//     
-//     */
-//    
-//    // ORLANDO configured in bottom method
-//    
-//    
-//    
-//    
 //   // [self.cityMapView addAnnotations:self.annotations];
 //    
 //}
@@ -118,16 +79,17 @@
 
 - (IBAction)useCurrentLocationTapped:(UIButton *)sender
 {
+    // ********************************** CAN'T MAKE THIS BUTTON GIVE DATA TO TABLEVIEW OR API?????? ****************
+    
     // USE MKAnnotatePoint to get gps coordinates
     [self configureLocationManager];
     
-    NSLog(@"%@ this is line 124ish", self.gpsCity.cityLatDouble);
+    NSLog(@"%@ this is line 84ish", self.gpsCity.cityLatDouble); // THIS SAYS NULL!!!!!!!!!*************************
     //[NSNumber numberWithDouble:23.234223]];
 //    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
 //    self.gpsCity.cityLatDouble = gpsLat;
 //    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
 //    self.gpsCity.cityLongDouble = gpsLtg;
-    
     
 }
 
@@ -188,7 +150,7 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
        CLLocation *locationNow = [locations lastObject];
-    NSLog(@"%@ locationNow this is Line 191ish", locationNow);
+    NSLog(@"%@ locationNow this is Line 150ish", locationNow); //************ I HAVE THE COORDINATES!! HOW DO I PASS THE DATA BACK???? ****************
     [self enableLocationManager:NO];
    //     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     NSNumber *gpsLat = [NSNumber numberWithDouble: locationNow.coordinate.latitude];
@@ -197,42 +159,10 @@
      self.gpsCity.cityLatDouble = gpsLtg;
   //  annotation.coordinate = locationNow.coordinate;
     
-    /*
-    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
-    self.gpsCity.cityLatDouble = gpsLat;
-    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
-    self.gpsCity.cityLongDouble = gpsLtg;
-     */
     
-    NSLog(@"%@ This is line 207ish", gpsLtg);
-
-
-    
-//        CLLocationDegrees cityPickedLat = [self.gpsCity.cityLatDouble doubleValue];
-//        CLLocationDegrees cityPickedLtg = [self.gpsCity.cityLongDouble doubleValue];
-//        CLLocationCoordinate2D cityPicked = CLLocationCoordinate2DMake(cityPickedLat, cityPickedLtg);
-        //CLLocationCoordinate2D tiySample = CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude)
-    
-   // self.gpsCity.cityLatDouble =
-/*
-    self.aCarItem.carLocationLat = location.coordinate.latitude;
-    self.aCarItem.carLocationLong = location.coordinate.longitude;
-    annotation.coordinate = location.coordinate;
-    annotation.title = @"Here is your car!!";
-    self.aCarItem.carLocationDescription = annotation.title;
-    [self.carItems addObject:self.aCarItem];
-  */
- //   [self.annotations addObject:annotation];
-
-//        annotation.coordinate = location.coordinate;
-    //    annotation.title = @"The Iron Yard";
-    //    [self.annotations addObject:annotation];
-   // [self configureAnnotations];
+    NSLog(@"%@ This is line 160ish", gpsLtg); // ********* CONFIRMING I HAVE JUST A DOUBLE HERE!!! NEED TO SEND OUT SOMEHOW?? ********************
+                                                 // ********* SOME REASON THIS IS GETTING CALLED TWICE AND LOGGING TWICE?? ********************
 }
-//
-//
-//
-//
 
 
 
