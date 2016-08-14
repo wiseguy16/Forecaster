@@ -39,11 +39,6 @@
     
   //  [self loadCityData];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,31 +117,8 @@
 }
 */
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark - Date Set delegate
+#pragma mark - Zipcode Set delegate
 
 -(void)searchWasTyped:(NSString *)zipcodeToLookUp
 {
@@ -167,34 +139,31 @@
     {
         SelectCityViewController *setZipcodeVC = [segue destinationViewController];
         setZipcodeVC.delegate = self;
+//      //  NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+//        setZipcodeVC.gpsCity = sender;
+//        if (sender)
+//        {
+//        //setZipcodeVC.gpsWeather = self.weathers[indexPath.row];
+//        NSString *lat = [NSString stringWithFormat:@"%@", setZipcodeVC.gpsCity.cityLatDouble];
+//        NSString *ltg = [NSString stringWithFormat:@"%@", setZipcodeVC.gpsCity.cityLongDouble];
+//        
+//        APIController *apiController = [[APIController alloc] init];
+//        apiController.delegate = self;
+//        [apiController searchDarkSkyForLat:lat andLong:ltg];
+//        }
     }
     
     if ([segue.identifier isEqualToString:@"DetailCitySegue"])
     {
         DetailCityViewController *setDetailVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        setDetailVC.detailCity = self.cities[indexPath.row];
+        setDetailVC.detailCity = sender; // self.cities[indexPath.row];
         setDetailVC.detailWeather = self.weathers[indexPath.row];
         
-        //City *selectedCity = [self.cities objectAtIndex:indexPath.row];
-
-       // setDetailVC.detailCity = City *aCity = self.cities[indexPath.row];//[self.cities objectAtIndex: indexPath.row]; //[getArray objectAtIndex:indexPath.row];
-       // setDetailVC.delegate = self;
+        
     }
-
     
 }
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([segue.identifier isEqualToString:@"DetailCitySegue"])
-//    {
-//        SelectCityViewController *setZipcodeVC = [segue destinationViewController];
-//        setZipcodeVC.delegate = self;
-//    }
-//}
-
-
 
 
 -(void)didReceiveAPIResults:(NSDictionary *)googleResponse
@@ -230,6 +199,8 @@
 }
 //#define kNameKey @"kCitiesKey";
 //#define kCitiesKey @"kCitiesKey";
+
+// ******************* NOT WORKING YET!!!!! *********************
 
 - (void)loadCityData
 {

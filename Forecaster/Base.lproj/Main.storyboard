@@ -66,6 +66,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Cities" id="Wm9-1h-JLo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7n8-V1-Hfz">
+                            <color key="tintColor" red="0.13551682233810425" green="0.45673513412475586" blue="0.16266146302223206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="t3w-js-5QP" kind="presentation" identifier="SelectCitySegue" id="gks-SD-OrL"/>
                             </connections>
