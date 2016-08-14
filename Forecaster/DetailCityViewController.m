@@ -63,8 +63,9 @@
         self.rainLabel.text = [NSString stringWithFormat:@"%g",([self.detailWeather.precipProbability doubleValue]*100)];
         self.feelsLikeLabel.text = [NSString stringWithFormat:@"Feels Like: %d°F", [self.detailWeather.apparentTemperature intValue]];
         self.windLabel.text = [NSString stringWithFormat:@"%dMPH", [self.detailWeather.windSpeed intValue]];
+        
+        [self configureAnnotations];
 
-        [self configureLocationManager];
     }
 }
 
@@ -88,71 +89,6 @@
     [self.cityMapView addAnnotations:self.annotations];
     
 }
-
--(void)configureLocationManager
-{
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusRestricted)
-    {
-        if (!self.locationManager)
-        {
-            self.locationManager = [[CLLocationManager alloc] init]; // need one to exist to even ask permission!!
-            self.locationManager.delegate = self;
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-            if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
-            {
-                // Don't forget to add the reason to the info.plist
-                [self.locationManager requestWhenInUseAuthorization];
-            }
-        }
-        
-        
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    if(status == kCLAuthorizationStatusAuthorizedWhenInUse)
-    {
-        [self enableLocationManager:YES];
-    }
-    else
-    {
-        [self enableLocationManager:NO];
-    }
-}
-
--(void)enableLocationManager:(BOOL)enable
-{
-    if (self.locationManager)
-    {
-        // good practice to stop locationManager first then start
-        [self.locationManager stopUpdatingLocation];
-        
-        if (enable)
-        {
-            [self.locationManager startUpdatingLocation];
-        }
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    if (error != kCLErrorLocationUnknown)
-    {
-        [self enableLocationManager:NO];
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
- //   CLLocation *location = [locations lastObject];
-    [self enableLocationManager:NO];
-//    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-//    annotation.coordinate = location.coordinate;
-//    [self.annotations addObject:annotation];
-    [self configureAnnotations];
-}
-
 
 
 @end

@@ -161,7 +161,6 @@
     
     
     NSLog(@"%@ This is line 160ish", gpsLtg); // ********* CONFIRMING I HAVE JUST A DOUBLE HERE!!! NEED TO SEND OUT SOMEHOW?? ********************
-                                                 // ********* SOME REASON THIS IS GETTING CALLED TWICE AND LOGGING TWICE?? ********************
 }
 
 
