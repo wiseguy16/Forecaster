@@ -9,7 +9,7 @@
 #import "DetailCityViewController.h"
 #import "ForecasterTableViewController.h"
 
-@interface DetailCityViewController ()
+@interface DetailCityViewController () <CLLocationManagerDelegate>
 
 @end
 
@@ -19,7 +19,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.annotations = [[NSMutableArray alloc] init];
+//     [self configureLocationManager];
     [self configureView];
 }
 
@@ -67,9 +68,124 @@
         // [NSString stringWithFormat:@"%d°F",[aWeather.temperature intValue]];
 //        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString:self.hero.imageName]];
 //        self.heroImageView.image = [UIImage imageWithData: imageData]; // This should probably be done async????
-//        
+//
+        [self configureLocationManager];
     }
 }
+
+-(void)configureAnnotations
+{
+    
+    // City Picked!!
+    CLLocationDegrees cityPickedLat = [self.detailCity.cityLatDouble doubleValue];
+    CLLocationDegrees cityPickedLtg = [self.detailCity.cityLongDouble doubleValue];
+    CLLocationCoordinate2D cityPicked = CLLocationCoordinate2DMake(cityPickedLat, cityPickedLtg);
+    //CLLocationCoordinate2D tiySample = CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude)
+    // 0 lat is equator north is pos, south is neg
+    // 0 long greeninch england west is neg, east is pos of England
+    MKPointAnnotation *cityPickedAnnotation = [[MKPointAnnotation alloc] init];
+    cityPickedAnnotation.coordinate = cityPicked;
+    cityPickedAnnotation.title = self.detailCity.name;
+   // cityPickedAnnotation.subtitle = @"Tampa";
+    [self.annotations addObject:cityPickedAnnotation];
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(cityPicked, 100000, 100000);
+    [self.cityMapView setRegion:viewRegion animated:YES];
+    
+/*
+    // LAKELAND
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:@"Lakeland, FL" completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (!error)
+        {
+            MKPlacemark *placemark = placemarks[0];
+            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+            annotation.coordinate = placemark.location.coordinate; // Using this later as a center point
+            annotation.title = @"Lakeland, FL";
+            [self.cityMapView addAnnotation:annotation]; // runs in background with network call
+            
+            MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 5000, 5000);
+            [self.cityMapView setRegion:viewRegion animated:YES];
+            
+        }
+    }];
+
+*/
+    
+    // ORLANDO configured in bottom method
+    
+    
+    
+    
+    [self.cityMapView addAnnotations:self.annotations];
+    
+}
+
+-(void)configureLocationManager
+{
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusRestricted)
+    {
+        if (!self.locationManager)
+        {
+            self.locationManager = [[CLLocationManager alloc] init]; // need one to exist to even ask permission!!
+            self.locationManager.delegate = self;
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+            if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
+            {
+                // Don't forget to add the reason to the info.plist
+                [self.locationManager requestWhenInUseAuthorization];
+            }
+        }
+        
+        
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if(status == kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [self enableLocationManager:YES];
+    }
+    else
+    {
+        [self enableLocationManager:NO];
+    }
+}
+
+-(void)enableLocationManager:(BOOL)enable
+{
+    if (self.locationManager)
+    {
+        // good practice to stop locationManager first then start
+        [self.locationManager stopUpdatingLocation];
+        
+        if (enable)
+        {
+            [self.locationManager startUpdatingLocation];
+        }
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if (error != kCLErrorLocationUnknown)
+    {
+        [self enableLocationManager:NO];
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+ //   CLLocation *location = [locations lastObject];
+    [self enableLocationManager:NO];
+//    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+//    annotation.coordinate = location.coordinate;
+//    annotation.title = @"The Iron Yard";
+//    [self.annotations addObject:annotation];
+    [self configureAnnotations];
+}
+
+
 
 
 // cell.cardImageView.image = [UIImage imageNamed:self.allCards[characterName]];

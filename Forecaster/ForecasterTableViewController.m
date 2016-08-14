@@ -14,11 +14,14 @@
 #import "Weather.h"
 #import "DetailCityViewController.h"
 
-@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate, NSCoding>
+@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate, NSCoding, CLLocationManagerDelegate>
 
 @property(strong, nonatomic) NSMutableArray *cities;
 @property(strong, nonatomic) NSMutableArray *weathers;
 @property(strong, nonatomic) NSMutableDictionary *userStuff;
+
+@property (strong, nonatomic) NSMutableArray *annotations;
+@property(strong, nonatomic) CLLocationManager *locationManager;
 //#define kCitiesKey @"kCitiesKey";
 
 @end
@@ -32,8 +35,9 @@
     
     self.cities = [[NSMutableArray alloc] init];
     self.weathers = [[NSMutableArray alloc] init];
+    self.annotations = [[NSMutableArray alloc] init];
     
-    [self loadCityData];
+  //  [self loadCityData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

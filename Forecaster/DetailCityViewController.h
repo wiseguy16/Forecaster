@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "City.h"
 #import "Weather.h"
+#import <MapKit/MapKit.h>
+
+@import CoreLocation;
 
 @interface DetailCityViewController : UIViewController
 
@@ -25,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *windLabel;
 //@property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 
+@property (weak, nonatomic) IBOutlet MKMapView *cityMapView;
 
+@property (strong, nonatomic) NSMutableArray *annotations;
+@property(strong, nonatomic) CLLocationManager *locationManager;
 
 @end

@@ -58,6 +58,7 @@
 		4A3FD79D1D5CF9950023DA28 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3FD79C1D5CF9950023DA28 /* City.m */; };
 		4A3FD7A01D5CF9B00023DA28 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3FD79F1D5CF9B00023DA28 /* Weather.m */; };
 		4A3FD7A31D5CF9C80023DA28 /* APIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3FD7A21D5CF9C80023DA28 /* APIController.m */; };
+		4A3FD7A51D5FF3350023DA28 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3FD7A41D5FF3350023DA28 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +123,7 @@
 		4A3FD79F1D5CF9B00023DA28 /* Weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
 		4A3FD7A11D5CF9C80023DA28 /* APIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIController.h; sourceTree = "<group>"; };
 		4A3FD7A21D5CF9C80023DA28 /* APIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIController.m; sourceTree = "<group>"; };
+		4A3FD7A41D5FF3350023DA28 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A3FD7A51D5FF3350023DA28 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +141,7 @@
 		4A3FD7101D5CF4F50023DA28 = {
 			isa = PBXGroup;
 			children = (
+				4A3FD7A41D5FF3350023DA28 /* MapKit.framework */,
 				4A3FD71B1D5CF4F50023DA28 /* Forecaster */,
 				4A3FD71A1D5CF4F50023DA28 /* Products */,
 			);
