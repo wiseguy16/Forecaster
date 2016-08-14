@@ -139,6 +139,22 @@
     {
         SelectCityViewController *setZipcodeVC = [segue destinationViewController];
         setZipcodeVC.delegate = self;
+//        if (sender)
+//        {
+//        setZipcodeVC.gpsCity = sender;
+//        }
+        if (setZipcodeVC.gpsCity)
+        {
+        [self.cities addObject:setZipcodeVC.gpsCity];
+            NSLog(@"this is line145ish");
+        }
+      //  setZipcodeVC.gpsCity.cityLatDouble = sender;
+        //setZipcodeVC.gpsCity.cityLongDouble = sender;
+     //   [self.cities addObject:setZipcodeVC.gpsCity];
+        if (setZipcodeVC.gpsCity.cityLatDouble)
+           {
+             NSLog(@"%@ line 152ish", setZipcodeVC.gpsCity.cityLatDouble);
+            }
 //      //  NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
 //        setZipcodeVC.gpsCity = sender;
 //        if (sender)

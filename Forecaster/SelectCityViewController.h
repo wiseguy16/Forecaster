@@ -11,6 +11,8 @@
 #import <MapKit/MapKit.h>
 #import "City.h"
 #import "Weather.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @import CoreLocation;
 
@@ -21,6 +23,8 @@
 //
 @property (strong, nonatomic) NSMutableArray *annotations;
 @property(strong, nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) IBOutlet UIButton *pickACityButton;
+@property (weak, nonatomic) IBOutlet UIButton *useGPSButton;
 
 @property (nonatomic) id<SearchTextFieldDelegate> delegate;
 

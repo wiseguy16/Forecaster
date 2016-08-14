@@ -20,6 +20,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.pickACityButton.layer.borderWidth = 1.0f;
+    self.useGPSButton.layer.borderWidth = 1.0f;
+    
+    self.pickACityButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.useGPSButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    self.pickACityButton.layer.cornerRadius = 4.0f;
+    self.useGPSButton.layer.cornerRadius = 4.0f;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -30,6 +39,8 @@
 
 - (IBAction)findACityTapped:(UIButton *)sender
 {
+    
+    
     [self.delegate searchWasTyped:self.zipcodeTextField.text];
     [self dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"%@", self.zipcodeTextField.text);
@@ -109,11 +120,13 @@
 {
     // USE MKAnnotatePoint to get gps coordinates
     [self configureLocationManager];
+    
+    NSLog(@"%@ this is line 124ish", self.gpsCity.cityLatDouble);
     //[NSNumber numberWithDouble:23.234223]];
-    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
-    self.gpsCity.cityLatDouble = gpsLat;
-    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
-    self.gpsCity.cityLongDouble = gpsLtg;
+//    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
+//    self.gpsCity.cityLatDouble = gpsLat;
+//    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
+//    self.gpsCity.cityLongDouble = gpsLtg;
     
     
 }
@@ -137,61 +150,85 @@
         
     }
 }
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if(status == kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [self enableLocationManager:YES];
+    }
+    else
+    {
+        [self enableLocationManager:NO];
+    }
+}
+
+-(void)enableLocationManager:(BOOL)enable
+{
+    if (self.locationManager)
+    {
+        // good practice to stop locationManager first then start
+        [self.locationManager stopUpdatingLocation];
+        
+        if (enable)
+        {
+            [self.locationManager startUpdatingLocation];
+        }
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if (error != kCLErrorLocationUnknown)
+    {
+        [self enableLocationManager:NO];
+    }
+}
 //
-//-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-//{
-//    if(status == kCLAuthorizationStatusAuthorizedWhenInUse)
-//    {
-//        [self enableLocationManager:YES];
-//    }
-//    else
-//    {
-//        [self enableLocationManager:NO];
-//    }
-//}
-//
-//-(void)enableLocationManager:(BOOL)enable
-//{
-//    if (self.locationManager)
-//    {
-//        // good practice to stop locationManager first then start
-//        [self.locationManager stopUpdatingLocation];
-//        
-//        if (enable)
-//        {
-//            [self.locationManager startUpdatingLocation];
-//        }
-//    }
-//}
-//
-//-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-//{
-//    if (error != kCLErrorLocationUnknown)
-//    {
-//        [self enableLocationManager:NO];
-//    }
-//}
-//
-//-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-//{
-//       CLLocation *location = [locations lastObject];
-//    [self enableLocationManager:NO];
-//        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-///*
-//    self.aCarItem.carLocationLat = location.coordinate.latitude;
-//    self.aCarItem.carLocationLong = location.coordinate.longitude;
-//    annotation.coordinate = location.coordinate;
-//    annotation.title = @"Here is your car!!";
-//    self.aCarItem.carLocationDescription = annotation.title;
-//    [self.carItems addObject:self.aCarItem];
-//    
-//    [self.annotations addObject:annotation];
-//*/
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+       CLLocation *locationNow = [locations lastObject];
+    NSLog(@"%@ locationNow this is Line 191ish", locationNow);
+    [self enableLocationManager:NO];
+   //     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    NSNumber *gpsLat = [NSNumber numberWithDouble: locationNow.coordinate.latitude];
+    NSNumber *gpsLtg = [NSNumber numberWithDouble: locationNow.coordinate.longitude];
+     self.gpsCity.cityLatDouble = gpsLat;
+     self.gpsCity.cityLatDouble = gpsLtg;
+  //  annotation.coordinate = locationNow.coordinate;
+    
+    /*
+    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
+    self.gpsCity.cityLatDouble = gpsLat;
+    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
+    self.gpsCity.cityLongDouble = gpsLtg;
+     */
+    
+    NSLog(@"%@ This is line 207ish", gpsLtg);
+
+
+    
+//        CLLocationDegrees cityPickedLat = [self.gpsCity.cityLatDouble doubleValue];
+//        CLLocationDegrees cityPickedLtg = [self.gpsCity.cityLongDouble doubleValue];
+//        CLLocationCoordinate2D cityPicked = CLLocationCoordinate2DMake(cityPickedLat, cityPickedLtg);
+        //CLLocationCoordinate2D tiySample = CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude)
+    
+   // self.gpsCity.cityLatDouble =
+/*
+    self.aCarItem.carLocationLat = location.coordinate.latitude;
+    self.aCarItem.carLocationLong = location.coordinate.longitude;
+    annotation.coordinate = location.coordinate;
+    annotation.title = @"Here is your car!!";
+    self.aCarItem.carLocationDescription = annotation.title;
+    [self.carItems addObject:self.aCarItem];
+  */
+ //   [self.annotations addObject:annotation];
+
 //        annotation.coordinate = location.coordinate;
-//    //    annotation.title = @"The Iron Yard";
-//        [self.annotations addObject:annotation];
-//   // [self configureAnnotations];
-//}
+    //    annotation.title = @"The Iron Yard";
+    //    [self.annotations addObject:annotation];
+   // [self configureAnnotations];
+}
 //
 //
 //

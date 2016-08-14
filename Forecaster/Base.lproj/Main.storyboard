@@ -65,8 +65,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Cities" id="Wm9-1h-JLo">
-                        <barButtonItem key="rightBarButtonItem" title="Pick A City" id="7n8-V1-Hfz">
-                            <color key="tintColor" red="0.13551682233810425" green="0.45673513412475586" blue="0.16266146302223206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add a city" id="7n8-V1-Hfz">
                             <connections>
                                 <segue destination="t3w-js-5QP" kind="presentation" identifier="SelectCitySegue" id="gks-SD-OrL"/>
                             </connections>
@@ -89,10 +88,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWz-HR-p9p">
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWz-HR-p9p">
                                 <rect key="frame" x="158" y="230" width="284" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
                                 <state key="normal" title="Get city from zipcode above">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -164,6 +164,8 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="pickACityButton" destination="iWz-HR-p9p" id="MVC-Hc-dsT"/>
+                        <outlet property="useGPSButton" destination="DQw-yo-kUN" id="A3l-I3-nbw"/>
                         <outlet property="zipcodeTextField" destination="Du8-fV-Zsr" id="ajU-fZ-rC1"/>
                     </connections>
                 </viewController>
@@ -263,7 +265,7 @@
                                 <color key="textColor" red="0.94901960780000005" green="0.96078431369999995" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Umi-ge-BOk">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Umi-ge-BOk">
                                 <rect key="frame" x="0.0" y="314" width="600" height="248.5"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OeP-JX-Qak">
