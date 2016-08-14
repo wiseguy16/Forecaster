@@ -8,7 +8,7 @@
 
 #import "SelectCityViewController.h"
 
-@interface SelectCityViewController ()  //<CLLocationManagerDelegate>
+@interface SelectCityViewController ()  <CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *zipcodeTextField;
 
@@ -35,22 +35,26 @@
     NSLog(@"%@", self.zipcodeTextField.text);
 }
 
+- (IBAction)DismissXTapped:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
-//
-//#pragma mark - Managing the detail view
-//
-//- (void)setCity:(City *)newCity andSetWeather:(Weather *)newWeather
-//{
-//    if (_gpsCity != newCity && _gpsWeather != newWeather)
-//    {
-//        _gpsCity = newCity;
-//        _gpsWeather = newWeather;
-//        
-//        // Update the view.
-//       // [self configureView];
-//    }
-//}
+
+#pragma mark - Managing the detail view
+
+- (void)setCity:(City *)newCity andSetWeather:(Weather *)newWeather
+{
+    if (_gpsCity != newCity && _gpsWeather != newWeather)
+    {
+        _gpsCity = newCity;
+        _gpsWeather = newWeather;
+        
+        // Update the view.
+       // [self configureView];
+    }
+}
 
 //-(void)configureAnnotations
 //{
@@ -103,36 +107,36 @@
 
 - (IBAction)useCurrentLocationTapped:(UIButton *)sender
 {
-//    // USE MKAnnotatePoint to get gps coordinates
-//    [self configureLocationManager];
-//    //[NSNumber numberWithDouble:23.234223]];
-//    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
-//    self.gpsCity.cityLatDouble = gpsLat;
-//    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
-//    self.gpsCity.cityLongDouble = gpsLtg;
+    // USE MKAnnotatePoint to get gps coordinates
+    [self configureLocationManager];
+    //[NSNumber numberWithDouble:23.234223]];
+    NSNumber *gpsLat =[NSNumber numberWithDouble:self.locationManager.location.coordinate.latitude];
+    self.gpsCity.cityLatDouble = gpsLat;
+    NSNumber *gpsLtg =[NSNumber numberWithDouble:self.locationManager.location.coordinate.longitude];
+    self.gpsCity.cityLongDouble = gpsLtg;
     
     
 }
 
-//-(void)configureLocationManager
-//{
-//    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusRestricted)
-//    {
-//        if (!self.locationManager)
-//        {
-//            self.locationManager = [[CLLocationManager alloc] init]; // need one to exist to even ask permission!!
-//            self.locationManager.delegate = self;
-//            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-//            if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
-//            {
-//                // Don't forget to add the reason to the info.plist
-//                [self.locationManager requestWhenInUseAuthorization];
-//            }
-//        }
-//        
-//        
-//    }
-//}
+-(void)configureLocationManager
+{
+    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusRestricted)
+    {
+        if (!self.locationManager)
+        {
+            self.locationManager = [[CLLocationManager alloc] init]; // need one to exist to even ask permission!!
+            self.locationManager.delegate = self;
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+            if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
+            {
+                // Don't forget to add the reason to the info.plist
+                [self.locationManager requestWhenInUseAuthorization];
+            }
+        }
+        
+        
+    }
+}
 //
 //-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 //{

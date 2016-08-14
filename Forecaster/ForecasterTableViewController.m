@@ -14,7 +14,7 @@
 #import "Weather.h"
 #import "DetailCityViewController.h"
 
-@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate, NSCoding, CLLocationManagerDelegate>
+@interface ForecasterTableViewController () <APIControllerProtocol, SearchTextFieldDelegate, CLLocationManagerDelegate>
 
 @property(strong, nonatomic) NSMutableArray *cities;
 @property(strong, nonatomic) NSMutableArray *weathers;
@@ -217,6 +217,7 @@
 
 - (void)saveCityData
 {
+  //  NSLog(self.cities[0]);
     NSData *cityData = [NSKeyedArchiver archivedDataWithRootObject:self.cities];
     [[NSUserDefaults standardUserDefaults] setObject:cityData forKey:@"kCitiesKey"];
 }
