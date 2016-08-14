@@ -8,7 +8,7 @@
 
 #import "SelectCityViewController.h"
 
-@interface SelectCityViewController ()  <CLLocationManagerDelegate>
+@interface SelectCityViewController ()  //<CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *zipcodeTextField;
 

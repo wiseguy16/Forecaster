@@ -88,8 +88,8 @@
    // NSLog(@"Something is %@", aCity.name);
     
     
-    cell.latTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
-    cell.longTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
+//    cell.latTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLatDouble];
+//    cell.longTempLabel.text = [NSString stringWithFormat:@"%@", aCity.cityLongDouble];
     
     
     
@@ -157,7 +157,7 @@
     {
         DetailCityViewController *setDetailVC = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        setDetailVC.detailCity = sender; // self.cities[indexPath.row];
+        setDetailVC.detailCity = self.cities[indexPath.row];
         setDetailVC.detailWeather = self.weathers[indexPath.row];
         
         

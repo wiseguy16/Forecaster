@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ForecasterTableViewController.h"
-#import <MapKit/MapKit.h>
+//#import <MapKit/MapKit.h>
 #import "City.h"
 #import "Weather.h"
 
-@import CoreLocation;
+//@import CoreLocation;
 
 @interface SelectCityViewController : UIViewController
 
